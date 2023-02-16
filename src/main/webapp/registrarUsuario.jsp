@@ -62,7 +62,7 @@ body {
 		<br>
 		<br>
 		<div class="campos_registrar">
-			<form name="formulario_registrar" action="ControladorUsuario" method="get">
+			<form name="formulario_registrar" action="ControladorUsuario" method="post">
 			<input type="hidden" name="instruccion" value="registrarUsuario">
 			
 			<label for="uDni">DNI:</label><br>

@@ -72,7 +72,7 @@ body {
 		<br>
 		<br>
 		<div class="campos_sesion">
-			<form name="formulario_inicio_sesion" action="ControladorUsuario" method="get">
+			<form name="formulario_inicio_sesion" action="ControladorUsuario" method="post">
 			<input type="hidden" name="instruccion" value="iniciarSesion">
 
 			<label for="usuario">Usuario:</label><br>

@@ -43,19 +43,49 @@ public class ControladorClave extends HttpServlet {
 
 		switch (instruccion) {
 
-		case "registrarClave":
-
-			try {
-				registrarClave(request, response);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			break;
-
 		case "reportarClave":
 
 			try {
 				reportarClave(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			break;
+			
+		case "generarClave":
+			
+			try {
+				generarClave(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			break;
+			
+		case "guardarClave":
+			
+			try {
+				guardarClave(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			break;
+			
+		default:
+			throw new IllegalArgumentException("Error: instruccion invalida");
+		}
+	}
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
+		String instruccion = request.getParameter("instruccion");
+
+		switch (instruccion) {
+
+		case "registrarClave":
+
+			try {
+				registrarClave(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -83,24 +113,6 @@ public class ControladorClave extends HttpServlet {
 
 			try {
 				editarClave(request, response);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			break;
-			
-		case "generarClave":
-			
-			try {
-				generarClave(request, response);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			break;
-			
-		case "guardarClave":
-			
-			try {
-				guardarClave(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

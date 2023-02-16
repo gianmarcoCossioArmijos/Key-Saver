@@ -61,7 +61,7 @@ body {
 		<br>
 		<br>
 		<div class="campos_editar">
-			<form name="formulario_registrar" action="ControladorClave" method="get">
+			<form name="formulario_registrar" action="ControladorClave" method="post">
 			<input type="hidden" name="instruccion" value="editarClave">
 			<input type="hidden" name="cId" value="${claveBuscada.cId}">
 			

@@ -63,7 +63,7 @@ body {
 		<br>
 		<br>
 		<div class="campos_editar">
-			<form name="formulario_registrar" action="ControladorUsuario" method="get">
+			<form name="formulario_registrar" action="ControladorUsuario" method="post">
 			<input type="hidden" name="instruccion" value="editarUsuario">
 			<input type="hidden" name="dni" value="${usuario.uDni}">
 

@@ -66,7 +66,7 @@ body {
 		<br>
 		<br>
 		<div class="campos_registrar">
-			<form name="formulario_registrar" action="ControladorClave" method="get">
+			<form name="formulario_registrar" action="ControladorClave" method="post">
 			<input type="hidden" name="instruccion" value="registrarClave">
 			
 			<label for="uDni">DNI Usuario:</label><br>

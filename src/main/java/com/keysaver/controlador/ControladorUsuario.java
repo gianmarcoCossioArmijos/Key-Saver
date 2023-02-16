@@ -43,6 +43,26 @@ public class ControladorUsuario extends HttpServlet {
 		String instruccion = request.getParameter("instruccion");
 		
 		switch (instruccion) {
+			
+		case "formatearClave":
+			
+			try {
+				formatearClave(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			break;
+
+		default:
+			throw new IllegalArgumentException("Error: instruccion invalida");
+		}
+	}
+	
+protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		String instruccion = request.getParameter("instruccion");
+		
+		switch (instruccion) {
 		
 		case "registrarUsuario": 
 			
@@ -57,15 +77,6 @@ public class ControladorUsuario extends HttpServlet {
 			
 			try {
 				iniciarSesion(request,response);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			break;
-			
-		case "formatearClave":
-			
-			try {
-				formatearClave(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

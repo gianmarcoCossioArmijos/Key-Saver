@@ -49,18 +49,18 @@ body {
 
 	<c:set var="uDniPublico" value="${dni}"></c:set>
 	
-	<form name="formulario" method="get">
+	<form name="formulario">
 	<input type="hidden" name="instruccion">
 	
 	<div class="contenedor_botones_inicio">
 	
 	<input type="hidden" name="uDniPublico" id="uDniPublico" value="${uDniPublico}">
 	
-		<input class="boton" type="button" name="lista" id="ingresar" value="Mis Claves &#127774" onclick="formulario.action='ControladorClave'; instruccion.value='reportarClave';formulario.submit()"/>
-		<input class="boton" type="button" name="registrarClave" id="registrarClave" value="Registrar Clave &#128125" onclick="window.location.href='registrarClave.jsp'; instruccion.value='generarClave'"/>
+		<input class="boton" type="button" name="lista" id="ingresar" value="Mis Claves &#127774" onclick="formulario.action='ControladorClave'; instruccion.value='reportarClave';formulario.method='get';formulario.submit()"/>
+		<input class="boton" type="button" name="registrarClave" id="registrarClave" value="Registrar Clave &#128125" onclick="window.location.href='registrarClave.jsp'"/>
 		<input class="boton" type="button" name="generarClave" id="generarClave" value="Generar Clave &#127752" onclick="window.location.href='generarClave.jsp'"/>
-		<input class="boton" type="button" name="editarUsuario" id="editarUsuario" value="Editar Usuario &#128541" onclick="formulario.action='ControladorUsuario'; instruccion.value='buscarUsuario';formulario.submit()"/>
-		<input class="boton" type="button" name="salir" id="salir" value="Cerrar Sesion &#128128" onclick="formulario.action='ControladorUsuario'; instruccion.value='formatearClave';formulario.submit()"/>
+		<input class="boton" type="button" name="editarUsuario" id="editarUsuario" value="Editar Usuario &#128541" onclick="formulario.action='ControladorUsuario'; instruccion.value='buscarUsuario';formulario.method='post';formulario.submit()"/>
+		<input class="boton" type="button" name="salir" id="salir" value="Cerrar Sesion &#128128" onclick="formulario.action='ControladorUsuario'; instruccion.value='formatearClave';formulario.method='get';formulario.submit()"/>
 	
 	</div>
 	
