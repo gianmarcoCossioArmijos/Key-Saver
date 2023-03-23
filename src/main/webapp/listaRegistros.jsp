@@ -90,6 +90,8 @@ caption {
 	<br>
 	<br>
 	<div class="contenedor_tabla_claves">
+	
+	<form name="formulario">
 
 		<table border="1" class="tabla">
 			<tr>
@@ -143,7 +145,10 @@ caption {
 		</tr>
 			
 	</c:forEach>
-		</table>
+
+	</table>
+	
+	</form>
 
 	</div>
 	<br>

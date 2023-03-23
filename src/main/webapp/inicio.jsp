@@ -56,7 +56,7 @@ body {
 	
 	<input type="hidden" name="uDniPublico" id="uDniPublico" value="${uDniPublico}">
 	
-		<input class="boton" type="button" name="lista" id="ingresar" value="Mis Claves &#127774" onclick="formulario.action='ControladorClave'; instruccion.value='reportarClave';formulario.method='get';formulario.submit()"/>
+		<input class="boton" type="button" name="lista" id="ingresar" value="Mis Claves &#127774" onclick="formulario.action='ControladorClave'; instruccion.value='reportarClave';formulario.method='post';formulario.submit()"/>
 		<input class="boton" type="button" name="registrarClave" id="registrarClave" value="Registrar Clave &#128125" onclick="window.location.href='registrarClave.jsp'"/>
 		<input class="boton" type="button" name="generarClave" id="generarClave" value="Generar Clave &#127752" onclick="window.location.href='generarClave.jsp'"/>
 		<input class="boton" type="button" name="editarUsuario" id="editarUsuario" value="Editar Usuario &#128541" onclick="formulario.action='ControladorUsuario'; instruccion.value='buscarUsuario';formulario.method='post';formulario.submit()"/>

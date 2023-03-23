@@ -42,15 +42,6 @@ public class ControladorClave extends HttpServlet {
 		String instruccion = request.getParameter("instruccion");
 
 		switch (instruccion) {
-
-		case "reportarClave":
-
-			try {
-				reportarClave(request, response);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			break;
 			
 		case "generarClave":
 			
@@ -70,27 +61,6 @@ public class ControladorClave extends HttpServlet {
 			}
 			break;
 			
-		default:
-			throw new IllegalArgumentException("Error: instruccion invalida");
-		}
-	}
-	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		
-		String instruccion = request.getParameter("instruccion");
-
-		switch (instruccion) {
-
-		case "registrarClave":
-
-			try {
-				registrarClave(request, response);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			break;
-
 		case "desactivarClave":
 
 			try {
@@ -108,20 +78,50 @@ public class ControladorClave extends HttpServlet {
 				e1.printStackTrace();
 			}
 			break;
-
-		case "editarClave":
-
-			try {
-				editarClave(request, response);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			break;
 			
 		case "eliminarClave":
 			
 			try {
 				eliminarClave(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			break;
+			
+		default:
+			throw new IllegalArgumentException("Error: instruccion invalida");
+		}
+	}
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
+		String instruccion = request.getParameter("instruccion");
+
+		switch (instruccion) {
+		
+		case "reportarClave":
+
+			try {
+				reportarClave(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			break;
+
+		case "registrarClave":
+
+			try {
+				registrarClave(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			break;
+
+		case "editarClave":
+
+			try {
+				editarClave(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
