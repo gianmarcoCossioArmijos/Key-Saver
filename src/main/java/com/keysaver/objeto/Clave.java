@@ -1,5 +1,9 @@
 package com.keysaver.objeto;
 
+/**
+ * Clase para crear un objeto de tipo clave
+ * @author gianmarcoCossio
+ */
 public class Clave {
 	
 	private int cId;

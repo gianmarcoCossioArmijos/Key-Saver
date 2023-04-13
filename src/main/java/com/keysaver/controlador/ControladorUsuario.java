@@ -1,6 +1,6 @@
 package com.keysaver.controlador;
 
-import java.io.IOException; 
+import java.io.IOException;
 
 import javax.annotation.Resource;
 import javax.servlet.RequestDispatcher;
@@ -14,14 +14,22 @@ import javax.sql.DataSource;
 import com.keysaver.modelo.ModeloUsuario;
 import com.keysaver.objeto.Usuario;
 
+/**
+ * Clase controlador usuario
+ * @author gianmarcoCossio
+ */
 @WebServlet("/ControladorUsuario")
 public class ControladorUsuario extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
-       
+     
+	//Inicializacion del modelo usuario
 	private ModeloUsuario modeloUsuario;
 	
+	//variable publica del dni de usuario que ayudara a verificar si el usuario esta logeado o no
 	public static int dniPublico;
 	
+	//Declaracion del pool de conexiones
 	@Resource(name = "jdbc/mysql_bd")
 	public DataSource pool;
 	
@@ -38,6 +46,10 @@ public class ControladorUsuario extends HttpServlet {
 		}
 	}
 
+	/**
+	 * Metodo que recibe una instruccion, en caso de recibir formatearClave como instruccion
+	 * se ejecutaran sus instruccioness en caso contrario devuelve una excepcion
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String instruccion = request.getParameter("instruccion");
@@ -47,7 +59,7 @@ public class ControladorUsuario extends HttpServlet {
 		case "formatearClave":
 			
 			try {
-				formatearClave(request, response);
+				formatearDni(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -58,7 +70,11 @@ public class ControladorUsuario extends HttpServlet {
 		}
 	}
 	
-protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	/**
+	 * Metodo que recibe una instruccion, la cual puede ser registrarUsuario, iniciarSesion, buscarUsuario,
+	 * o editarUsuario, y de acuerdo a ello ejecutara instrucciones, o en caso contrario devolvera una excepcion
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String instruccion = request.getParameter("instruccion");
 		
@@ -105,6 +121,12 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 		}
 	}
 
+	/**
+	 * Metodo que obtiene los datos del usuario, los edita en la base de datos y retorna al inicio
+	 * @param request
+	 * @param response
+	 * @throws Exception
+	 */
 	private void editarUsuario(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		int dni = Integer.parseInt(request.getParameter("dni"));
@@ -120,6 +142,12 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 		dispatcher.forward(request, response);
 	}
 	
+	/**
+	 * Metodo que busca al usuario con el dni publico, y retorna ala vista para editar el usuario buscado
+	 * @param request
+	 * @param response
+	 * @throws Exception
+	 */
 	private void buscarUsuario(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		Usuario usuario = modeloUsuario.buscarUsuario(dniPublico);
@@ -130,7 +158,14 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 		dispatcher.forward(request, response);
 	}
 
-	private void formatearClave(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	/**
+	 * Metodo que fomatea dni publico, y asi cerrar sesion, con esto no se podra obtener
+	 * informacion de las claves del usuario con el dni a formatear, y nos retorna al inicio
+	 * @param request
+	 * @param response
+	 * @throws Exception
+	 */
+	private void formatearDni(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		dniPublico = 0;
 		
@@ -138,6 +173,14 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 		dispatcher.forward(request, response);
 	}
 
+	/**
+	 * Metodo que obtiene el dni y clave del usuario y lo busca en la base de datos
+	 * para asi poder logearse, en caso de encontrar al suuario nos retorna al inicio
+	 * y en caso contrario nos retorna al login
+	 * @param request
+	 * @param response
+	 * @throws Exception
+	 */
 	private void iniciarSesion(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		int dni = Integer.parseInt(request.getParameter("usuario"));
@@ -166,6 +209,13 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 		}
 	}
 
+	/**
+	 * Metodo que obtiene los datos de un usuario nuevo, lo registra, y nos retorna
+	 * al login para poder logearnos
+	 * @param request
+	 * @param response
+	 * @throws Exception
+	 */
 	private void registrarUsuario(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		int dni = Integer.parseInt(request.getParameter("uDni"));

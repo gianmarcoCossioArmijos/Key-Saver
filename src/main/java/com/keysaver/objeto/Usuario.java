@@ -1,5 +1,9 @@
 package com.keysaver.objeto;
 
+/**
+ * Clase que crea un objeto de tipo usuario
+ * @author gianmarcoCossio
+ */
 public class Usuario {
 
 	private int uDni;

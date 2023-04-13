@@ -15,12 +15,19 @@ import javax.sql.DataSource;
 import com.keysaver.modelo.ModeloClave;
 import com.keysaver.objeto.Clave;
 
+/**
+ * Clase controlador usuario
+ * @author gianmarcoCossio
+ */
 @WebServlet("/ControladorClave")
 public class ControladorClave extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
 
+	//Inicializacion del modelo clave
 	private ModeloClave modeloClave;
 
+	//Declaracion del pool de conexiones
 	@Resource(name = "jdbc/mysql_bd")
 	public DataSource pool;
 	
@@ -36,6 +43,10 @@ public class ControladorClave extends HttpServlet {
 		}
 	}
 
+	/**
+	 * Metodo que recibe una instruccion, la cual puede ser generarClave, guardarClave, desactivarClave,
+	 * buscarClave, eliminarClave, y de acuerdo a ello ejecutara instrucciones, o en caso contrario devolvera una excepcion
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -93,6 +104,10 @@ public class ControladorClave extends HttpServlet {
 		}
 	}
 	
+	/**
+	 * Metodo que recibe una instruccion, la cual puede ser reportarClave, registrarClave, editarClave,
+	 * y de acuerdo a ello ejecutara instrucciones, o en caso contrario devolvera una excepcion
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
@@ -131,7 +146,14 @@ public class ControladorClave extends HttpServlet {
 			throw new IllegalArgumentException("Error: instruccion invalida");
 		}
 	}
-
+	
+	/**
+	 * Metodo que recibe un id como parametro, busca una clave con dicho parametro,
+	 * elimina la clave en la base de datos, y en caso contrario devuelve una excepcion
+	 * @param request
+	 * @param response
+	 * @throws Exception
+	 */
 	private void eliminarClave(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		int cId = Integer.parseInt(request.getParameter("cId"));
@@ -146,6 +168,12 @@ public class ControladorClave extends HttpServlet {
 		reportarClave(request, response);
 	}
 
+	/**
+	 * Metodo que recibe una clave generada, y nos devuelve al formulario para registrar clave
+	 * @param request
+	 * @param response
+	 * @throws Exception
+	 */
 	private void guardarClave(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		String parametro = request.getParameter("claveGenerada");
@@ -156,6 +184,13 @@ public class ControladorClave extends HttpServlet {
 		dispatcher.forward(request, response);
 	}
 
+	/**
+	 * Metodo que recibe una dificultad , la cual sera usada para generar una clave segura,
+	 * y nos devuelve a la misma vista de generar clave segura
+	 * @param request
+	 * @param response
+	 * @throws Exception
+	 */
 	private void generarClave(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		int dificultad = Integer.parseInt(request.getParameter("dificultad"));
@@ -168,6 +203,13 @@ public class ControladorClave extends HttpServlet {
 		dispatcher.forward(request, response);
 	}
 
+	/**
+	 * Metodo que recibe un id de clave, luego busca una clave con dicho id, y
+	 * finalmente nos envia al formulario para editar clave
+	 * @param request
+	 * @param response
+	 * @throws Exception
+	 */
 	private void buscarClave(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
 		int cId = Integer.parseInt(request.getParameter("cId"));
@@ -180,6 +222,12 @@ public class ControladorClave extends HttpServlet {
 		dispatcher.forward(request, response);
 	}
 
+	/**
+	 * Metodo que recibe datos de una clave, para editarlos
+	 * @param request
+	 * @param response
+	 * @throws Exception
+	 */
 	private void editarClave(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
 		int id = Integer.parseInt(request.getParameter("cId"));
@@ -197,6 +245,12 @@ public class ControladorClave extends HttpServlet {
 		reportarClave(request, response);
 	}
 
+	/**
+	 * Metodo que recibe id de clave, para luego cambiar el estado de la clave
+	 * @param request
+	 * @param response
+	 * @throws Exception
+	 */
 	private void desactivarClave(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
 		int cId = Integer.parseInt(request.getParameter("cId"));
@@ -206,6 +260,12 @@ public class ControladorClave extends HttpServlet {
 		reportarClave(request, response);
 	}
 
+	/**
+	 * Metodo que reporta las claves de un usuario utilizando el dni publico
+	 * para obtener dichas claves, y luego nos envia a la vista de las claves
+	 * @param request
+	 * @param response
+	 */
 	private void reportarClave(HttpServletRequest request, HttpServletResponse response) {
 
 		List<Clave> clave;
@@ -226,6 +286,12 @@ public class ControladorClave extends HttpServlet {
 		}
 	}
 
+	/**
+	 * Metodo que recibe datos de una clave, para luego registrarla en la
+	 * base de datos
+	 * @param request
+	 * @param response
+	 */
 	private void registrarClave(HttpServletRequest request, HttpServletResponse response) {
 
 		int uDni = Integer.parseInt(request.getParameter("uDni"));
