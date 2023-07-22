@@ -8,161 +8,103 @@
 <head>
 <meta charset="UTF-8">
 <title>Key Saver</title>
+<link rel="stylesheet" href="./styles.css">
+<script src="https://cdn.tailwindcss.com"></script>
 </head>
-<style type="text/css">
 
-* {
-	font-family: monospace;
-}
-
-body {
-    background-image: url("https://png.pngtree.com/background/20210717/original/pngtree-background-retro-computer-game-end-fault-picture-image_1428217.jpg");
-}
-
-table {
-   width: 800px;
-   border: 1px solid #000;
-   background-color: white;
-   border-collapse: collapse;
-}
-
-th, td {
-   width: 25%;
-   text-align: left;
-   vertical-align: top;
-   border: 1px solid #000;
-   padding: 0.3em;
-   caption-side: bottom;
-}
-
-caption {
-   padding: 0.3em;
-   color: white;
-   background-color: #720587;
-}
-
-.titulo {
-	margin-top: 30px;
-	text-align: center;
-}
-
-.contenedor_lista_claves {
-	width: 1000px;
-	background-color: white;
-	color: #000000;
-	margin: auto;
-	border: solid grey 1.5px;
-	border-radius: 15px;
-}
-
-.tabla {
-	margin: auto;
-}
-
-.contenedor_tabla_claves {
-	margin: auto;
-}
-
-.contenedor_registrar_clave {
-	padding-left: 70px;
-	padding-right: 70px;
-	display: grid;
-  	grid-template-columns: 780px auto;
-}
-
-.boton {
-	width: 300px;
-	height: 30px;
-	color: #ffffff;
-	background-color: #720587;
-	border-radius: 8px;
-}
-
-</style>
 <body>
 
-<div class="contenedor_lista_claves">
+	<main class="h-screen text-3xl bg-[url('https://images.unsplash.com/photo-1579547621700-03c2c337370a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1878&q=80')] bg-cover h-screen">
 	
-	<div class="titulo">
-		<h2>Mis Claves &#127774</h2>
-	</div>
-	<br>
-	<br>
-	<br>
-	<div class="contenedor_tabla_claves">
+		<header class="flex flex-row justify-between bg-lime-500 rounded-b-md text-3xl font-bold text-white text-center p-4">
 	
-	<form name="formulario">
+			<a href="inicio.jsp">Key Saver &#128273</a>
+					
+			<ul class="flex flex-row">
+				<li><a class="mx-6" href="inicio.jsp">Inicio</a></li>
+				<li class="mx-6"><a href="generarClave.jsp">Generar clave</a></li>
+				<li class="mx-6"><a class="nav-link" href="editarUsuario.jsp">Configuracion</a></li>
+			</ul>
+		</header>
 
-		<table border="1" class="tabla">
-			<tr>
-				<td class="header">ID</td>
-				<td class="header">DNI Usuario</td>
-				<td class="header">Clave</td>
-				<td class="header">Usuario/cuenta</td>
-				<td class="header">Pagina/web</td>
-				<td class="header">Telefono</td>
-				<td class="header">Estado</td>
-				<td class="header">Accion</td>
-			</tr>
+		<div class="m-5 bg-lime-500 rounded-lg bg-white">
 	
-	<c:forEach var="temporal" items="${listaClave}">
+			<div class="w-full p-3">
+				<h2>Mis Claves &#127774</h2>
+			</div>
+
+			<div class="w-full p-3">
 	
-	<c:url var="linkBuscar" value="ControladorClave">
+				<form class="w-full" name="formulario">
+
+					<table class="w-full border-separate border-spacing-2 border border-slate-500">
+						<tr class="border border-slate-600">
+							<td class="w-1/8 m-2">ID</td>
+							<td class="w-1/8 m-2">DNI Usuario</td>
+							<td class="w-1/8 m-2">Clave</td>
+							<td class="w-1/8 m-2">Usuario/cuenta</td>
+							<td class="w-1/8 m-2">Pagina/web</td>
+							<td class="w-1/8 m-2">Telefono</td>
+							<td class="w-1/8 m-2">Estado</td>
+							<td class="w-1/8 m-2">Accion</td>
+						</tr>
 	
-		<c:param name="instruccion" value="buscarClave"></c:param>
-		<c:param name="cId" value="${temporal.cId}"></c:param>
+						<c:forEach var="temporal" items="${listaClave}">
 	
-	</c:url>
+							<c:url var="linkBuscar" value="ControladorClave">
+								<c:param name="instruccion" value="buscarClave"></c:param>
+								<c:param name="cId" value="${temporal.cId}"></c:param>
+							</c:url>
 	
-	<c:url var="linkDesactivar" value="ControladorClave">
+							<c:url var="linkDesactivar" value="ControladorClave">
+								<c:param name="instruccion" value="desactivarClave"></c:param>
+								<c:param name="cId" value="${temporal.cId}"></c:param>
+							</c:url>
 	
-		<c:param name="instruccion" value="desactivarClave"></c:param>
-		<c:param name="cId" value="${temporal.cId}"></c:param>
-	
-	</c:url>
-	
-	<c:url var="linkEliminar" value="ControladorClave">
-	
-		<c:param name="instruccion" value="eliminarClave"></c:param>
-		<c:param name="cId" value="${temporal.cId}"></c:param>
-	
-	</c:url>
-		<tr>
-			<td class="row">${temporal.cId}</td>
-			<td class="row">${temporal.uDni}</td>
-			<td class="row">${temporal.cClave}</td>
-			<td class="row">${temporal.cCuenta}</td>
-			<td class="row">${temporal.cPagina}</td>
-			<td class="row">${temporal.cTelefono}</td>
-			<td class="row">${temporal.cEstado}</td>
-			<td class="row">
-				<a href="${linkBuscar}" target="blank">editar</a>
-				&nbsp;&nbsp;
-				<a href="${linkDesactivar}" target="self">desactivar</a>
-				&nbsp;&nbsp;
-				<a href="${linkEliminar}" target="self">eliminar</a>
-			</td>
-		</tr>
+							<c:url var="linkEliminar" value="ControladorClave">
+								<c:param name="instruccion" value="eliminarClave"></c:param>
+								<c:param name="cId" value="${temporal.cId}"></c:param>
+							</c:url>
+
+							<tr>
+								<td class="row">${temporal.cId}</td>
+								<td class="row">${temporal.uDni}</td>
+								<td class="row">${temporal.cClave}</td>
+								<td class="row">${temporal.cCuenta}</td>
+								<td class="row">${temporal.cPagina}</td>
+								<td class="row">${temporal.cTelefono}</td>
+								<td class="row">${temporal.cEstado}</td>
+								<td class="row">
+									<button class="py-1 px-3 border-1 border-2 border-stone-200 rounded-md bg-lime-500 hover:bg-lime-600">
+										<a href="${linkBuscar}" target="blank">editar</a>
+									</button>
+									&nbsp;&nbsp;
+									<button class="py-1 px-3 border-1 border-2 border-stone-200 bg-yellow-500 rounded-md hover:bg-yellow-600">
+										<a href="${linkDesactivar}" target="self">desactivar</a>
+									</button>
+									&nbsp;&nbsp;
+									<button class="py-1 px-3 border-2 border-stone-200 bg-red-500 rounded-md hover:bg-red-600">
+										<a href="${linkEliminar}" target="self">eliminar</a>
+									</button>
+								</td>
+							</tr>
 			
-	</c:forEach>
+						</c:forEach>
 
-	</table>
+					</table>
 	
-	</form>
+				</form>
 
-	</div>
-	<br>
-	<br>
-	<br>
-	<div class="contenedor_registrar_clave">
-	
-		<input type="button" value="Registrar Clave" class="boton" onclick="window.location.href='registrarClave.jsp'"/>
-		<a class="link_inicio" href="inicio.jsp" target="blank">Ir a Inicio</a>
-		
-	</div>
-	<br>
-	<br>
-</div>
+			</div>
+
+			<div class="flex flex-row justify-between bg-white p-3">
+				<button class="w-1/4 my-3 p-6 border-1 border-2 border-stone-200 bg-lime-500 hover:bg-lime-600 rounded-lg text-white"><input type="submit" value="Registrar Clave" onclick="window.location.href='registrarClave.jsp'"/></button>
+				<a class="text-blue-500 hover:underline content-center" href="inicio.jsp" target="blank"><h1 class="text-2xl text-end">Ir a Inicio</h1></a>
+			</div>
+
+		</div>
+
+	</main>
 
 </body>
 </html>
